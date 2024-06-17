@@ -1,0 +1,27 @@
+TASK: "segmentation"
+DATASETS:
+  DIR_NAME:
+    RAW: "/data/Reedbush/gi95/tokuoka/QCANet/datasets/dataset_bf/bf/raw"
+    INSTANCE: "/data/kanazawa/images/qcanet"
+    #CENTER: "/data/kanazawa/images/medoid"
+  SPLIT_LIST: "datasets/split_list_411/train/dataset.txt"
+  ARRAY_TYPE: "tif"
+  RESOLUTION: !!python/tuple [1.0, 1.0, 2.5]
+  DIMMENSION: 3
+  PREPROCESS:
+    AUGMENTATION: True
+    SCALING: True
+  INPUT_SIZE: !!python/tuple [128, 128, 128]
+  BATCH_SIZE: 2
+  BACKGROUN_VALUE: 0  # value 1 means foregroud instance
+RUNTIME:
+  TRAIN_EPOCH: 10
+  HALF_PRECISION: True
+  OPTIMIZER:
+    NAME: AMSGrad
+    INIT_LR: 0.0001
+    #MOMENTUM: 0.9
+    WEIGHT_DECAY: 0.0001
+LOG:
+  EVALUATION_START: 2000
+  EVALUATION_INTERVAL: 500

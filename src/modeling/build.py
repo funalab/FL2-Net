@@ -1,6 +1,5 @@
 from src.modeling.backbone.unet import *
 from src.modeling.backbone.fpn import FPN
-from src.modeling.transformer_decoder.mask2former_transformer_decoder import MultiScaleMaskedTransformerDecoder
 
 def build_backbone(cfg, in_channel=None, out_channel=None):
     model_args = {}

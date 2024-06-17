@@ -151,7 +151,7 @@ class Trainer():
 
 def main():
 
-    """ Implementation of Transformer-based 3D instance Segmentation Network """
+    """ Implementation of 3D instance Segmentation Network """
     start_time = time.time()
 
     ''' ConfigParser '''
@@ -162,7 +162,7 @@ def main():
     )
     conf_parser.add_argument("-r", "--runtime_conf", help="Specify config file for runtime", metavar="FILE_PATH")
     conf_parser.add_argument("-m", "--model_conf", help="Specify config file for model", metavar="FILE_PATH")
-    conf_parser.add_argument("-o", "--output_dir", help="Specify output directory name", nargs='?', default='results/mask3dformer/train',)
+    conf_parser.add_argument("-o", "--output_dir", help="Specify output directory name", nargs='?', default='results/train',)
     args = conf_parser.parse_args()
     argvs = sys.argv
 
