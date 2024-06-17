@@ -3,7 +3,6 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from src.modeling.blocks.rnn import ConvLSTM, ConvGRU, ConvBLSTM, ConvBGRU
-from einops import rearrange, repeat
 
 
 class BasicLayers(nn.Module):

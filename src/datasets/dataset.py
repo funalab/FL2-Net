@@ -10,7 +10,6 @@ from skimage import io
 from skimage import transform as tr
 from skimage.segmentation import relabel_sequential
 from skimage import morphology
-from einops import rearrange, repeat
 
 from src.utils.utils import mirror_extension_image
 import torch
@@ -229,7 +228,8 @@ class PreprocessedDataset(Dataset):
         inputs['image_size'] = np.array(x.shape[-3:])
         print(self.img_path[i])
 
-        x = rearrange(self._resize(self._normalize(x), order=1).astype(np.float32), 'l d h w -> l 1 d h w')
+        x = self._resize(self._normalize(x), order=1)
+        x = np.expand_dims(x, axis=1).astype(np.float32)
 
         if not self.rnn:
             x = x.squeeze(0)

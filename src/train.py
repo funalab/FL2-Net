@@ -17,6 +17,7 @@ import tifffile
 
 import torch
 from torch.utils.data import DataLoader
+from torch.cuda.amp import autocast
 
 sys.path.append(os.getcwd())
 from src.utils.utils import createOpbase, get_optimizer
@@ -101,7 +102,8 @@ class Trainer():
         for batch in dataset_iter:
 
             optimizer.zero_grad()
-            with torch.amp.autocast(device_type='cuda', dtype=torch.float16, enabled=self.half_precision):
+            #with torch.amp.autocast(device_type='cuda', dtype=torch.float16, enabled=self.half_precision):
+            with autocast(enabled=self.half_precision):
                 outputs = model(batch, mode='train', inference=(self.iteration >= self.iter_eval))
                 loss = outputs['loss']
             self.scaler.scale(loss['loss_sum']).backward()

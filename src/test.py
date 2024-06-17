@@ -17,9 +17,9 @@ from skimage import morphology as mor
 from argparse import ArgumentParser
 from concurrent.futures.process import ProcessPoolExecutor
 import torch
-from einops import rearrange, repeat
 from torch.utils.data import DataLoader
 import torch.nn.functional as F
+from torch.cuda.amp import autocast
 
 sys.path.append(os.getcwd())
 from src.utils.utils import mirror_extension_image, createOpbase, labeling
@@ -64,7 +64,8 @@ class Tester():
 
             if self.task == 'segmentation' or self.task == "detection":
                 # segmentation prediction
-                with torch.amp.autocast(device_type='cuda', dtype=torch.float16, enabled=self.half_precision), torch.no_grad():
+                #with torch.amp.autocast(device_type='cuda', dtype=torch.float16, enabled=self.half_precision), torch.no_grad():
+                with autocast(enabled=self.half_precision), torch.no_grad():
                     if self.stitch:
                         output = model(batch, mode='test', inference=True, patchsize=self.patchsize)
                     else:
