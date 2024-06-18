@@ -1,0 +1,62 @@
+# MacOSX
+.DS_Store
+#emacs
+*~
+
+#Output
+results/*
+datasets_previous
+
+#log draw
+draw*
+graph*
+
+#Run-Time
+confs/3dunet
+confs/celegans
+confs/compare
+
+
+#Python
+__pycache__/
+**.pyc
+#datasets/
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# PyCharm
+.idea/
+
+#Reedbush
+reedbush
+*.e*
+*.o*
+*.tar.gz
+
+!.gitkeep
