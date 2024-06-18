@@ -2,6 +2,8 @@
 
 This is the code for [Four-dimensional label-free live cell image segmentation for predicting live birth potential of embryos]().
 This project is carried out in cooperation with [Funahashi Lab. at Keio University](https://fun.bio.keio.ac.jp/) and Yamagata Lab. at Kindai University.
+The images below are time-series 3D bright-field microscopy image and segmentation image by the proposed method.
+The 3D images visualized with 3D viewer plugin [[1]](#ref1) of Fiji.
 
 <img src="images/segmentation_result.gif" alt="result" width="600"/>
 
@@ -11,6 +13,21 @@ Our method performs instance segmentation of 3D bright-field microscopy images.
 Our model performs instance segmentation of the time-series 3D bright-field microscopy images at each time point, and the quantitative criteria for mouse development are extracted from the acquired time-series segmentation image.
 
 <img src="images/model.png" alt="model" width="500"/>
+
+## Performance
+
+Our method performs State-of-the-Art on time-series 3D bright-field microscopy images by considering time-series information, 
+but ours w/o considering time-series information (Ours w/o GRU) also performs better than the existing methods.
+The segmentation accuracy below is represented by AP<sub>dsb</sub> with IoU thresholds ranging from 0.1 to 0.9
+
+| IoU threshold             | 0.1               | 0.2               | 0.3               | 0.4               | 0.5               | 0.6               | 0.7               | 0.8               | 0.9               |
+|---------------------------|-------------------|-------------------|-------------------|-------------------|-------------------|-------------------|-------------------|-------------------|-------------------|
+| Ours                      | **0.866**         | **0.861**         | **0.852**         | **0.836**         | **0.808**         | **0.763**         | **0.677**         | **0.454**         | **0.023**         |
+| Ours (w/o GRU)            | 0.870             | 0.863             | 0.850             | 0.829             | 0.795             | 0.738             | 0.642             | 0.405             | 0.012             |
+| QCANet[[2]](#ref2)        | 0.848             | 0.834             | 0.814             | 0.786             | 0.745             | 0.683             | 0.576             | 0.320             | 0.005             |
+| EmbedSeg[[3]](#ref3)      | 0.817             | 0.813             | 0.807             | 0.797             | 0.755             | 0.728             | 0.614             | 0.333             | 0.007             |
+| StarDist[[4]](#ref4)      | 0.569             | 0.551             | 0.513             | 0.458             | 0.389             | 0.291             | 0.134             | 0.006             | 0.000             |
+
 
 
 ## QuickStart
@@ -34,11 +51,11 @@ Our model performs instance segmentation of the time-series 3D bright-field micr
   
    Currently we provide some pretrained models for 3d and 3d+t bright-feild microscopy image.
    * [best_model.pth](https://fun.bio.keio.ac.jp/software/QCANet/best_model.pth) : model trained using `confs/model/base.yaml`
-   * [best_model_gru3.path](https://fun.bio.keio.ac.jp/software/QCANet/best_model_gru3.pth) : model with GRU(Gated recurrent unit) trined using `confs/model/gru3.yaml`  
+   * [best_model_gru3.path](https://fun.bio.keio.ac.jp/software/QCANet/best_model_gru3.pth) : model with GRU(Gated recurrent unit) trained using `confs/model/gru3.yaml`  
 
    Run the following command to segment brigh-field images in `datasets/examples/raw`.
    The segmentation images will be generated in the `results/test_example_[time_stamp]/Predictions`.
-   The expected output of this segmentation is stored in `images/example_output/ws_16cell-stage.tif`. 
+   The expected output of this segmentation is stored in `images/example_output`. 
 
    ```sh
    % wget -P models https://fun.bio.keio.ac.jp/software/QCANet/best_model.pth  # or best_model_gru.path
@@ -105,16 +122,23 @@ Our model performs instance segmentation of the time-series 3D bright-field micr
    % python -i [path/to/segmentation/images] -o results/feat
    ```
 
+5. **Live birth potential prediction**:  
+   [Normalized Multi-View Attention Network (NVAN)](https://github.com/funalab/NVAN) performs 
+   the prediction of live birth potential of embryo using the time-series segmentation images extracted by segmentation (`criteria.csv`)  
+
 **NOTE**
 - The pair of image and ground truth must be the same name `T.tif` (T: temporal index composed of three digits).  
 - The timepoint index is assumed to start from 1 by default. If you want to change it, set `cfg.DATASETS.BASETIME`.
-- For time-series images, `confs/model/gru3.yaml` is recommended for higher performance. If you want to perform time-independent segmentation, `confs/model/base.yaml`, which offers a lighter model, is recommended.  
+- For time-series images, `confs/model/gru3.yaml` is recommended for higher performance. If you want to perform time-independent segmentation, `confs/model/base.yaml`, which offers a smaller model, is recommended.  
  
 ## Acknowledgement
 
 The microscopy images included in this repository is provided by Yamagata Lab., Kindai University.
-The development of this algorithm was funded by JSPS KAKENHI Grant Numbers 16H04731 and 20H03244 to [Akira Funahashi](https://github.com/funasoul).
+The development of this algorithm was funded by JST CREST (Grant Number JPMJCR2331) to [Akira Funahashi](https://github.com/funasoul).
 
 ## References
 
-<a name="ref1"></a> [[1] Schmid, Benjamin, et al. "A high-level 3D visualization API for Java and ImageJ." BMC bioinformatics 11.1 274 (2010).](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-11-274)
+<a name="ref1"></a> [[1] Schmid, Benjamin, et al. "A high-level 3D visualization API for Java and ImageJ." BMC bioinformatics 11, 274 (2010).](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-11-274)  
+<a name="ref2"></a> [[2] Yuta, Tokuoka, et al. "3D convolutional neural networks-based segmentation to acquire quantitative criteria of the nucleus during mouse embryogenesis." NPJ systems biology and applications 6, 32 (2020).](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-11-274)  
+<a name="ref3"></a> [[3] Manan, Lalit, et al. " EmbedSeg: Embedding-based Instance Segmentation for Biomedical Microscopy Data." Medical image analysis 81, 10523 (2022).](https://www.sciencedirect.com/science/article/abs/pii/S1361841522001700)  
+<a name="ref4"></a> [[4] Martin, Weigert, et al. "Star-convex Polyhedra for 3D Object Detection and Segmentation in Microscopy."  in Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision 3666–3673 (2020).](https://openaccess.thecvf.com/content_WACV_2020/html/Weigert_Star-convex_Polyhedra_for_3D_Object_Detection_and_Segmentation_in_Microscopy_WACV_2020_paper.html)  
