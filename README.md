@@ -61,9 +61,6 @@ Our model performs instance segmentation of the time-series 3D bright-field micr
      * `cfg.DATASETS.RESOLUTION` : Specify microscopy resolution of x-, y-, and z-axis. (defalt=1.0:1.0:2.18)
 
    * model config  (e.g. `confs/model/base.yaml` / `confs/model/gru3.yaml`)  
-  
-   **NOTE**: The pair of image and ground truth must be the same name `T.tif` (T: zero-based temporal index composed of three digits).  
-   **NOTE**: For time-series images, `confs/model/gru3.yaml` is recommended for higher performance. If you want to perform time-independent segmentation, `confs/model/base.yaml`, which offers a lighter model, is recommended.
 
 1. **Training**:  
    Run the following command to train segmentation model on the datasets/input_example dataset.
@@ -107,6 +104,11 @@ Our model performs instance segmentation of the time-series 3D bright-field micr
    ```sh
    % python -i [path/to/segmentation/images] -o results/feat
    ```
+
+**NOTE**
+- The pair of image and ground truth must be the same name `T.tif` (T: temporal index composed of three digits).  
+- The timepoint index is assumed to start from 1 by default. If you want to change it, set `cfg.DATASETS.BASETIME`.
+- For time-series images, `confs/model/gru3.yaml` is recommended for higher performance. If you want to perform time-independent segmentation, `confs/model/base.yaml`, which offers a lighter model, is recommended.  
  
 ## Acknowledgement
 
