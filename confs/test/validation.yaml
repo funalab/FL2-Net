@@ -1,12 +1,12 @@
 TASK: "segmentation"
 DATASETS:
   DIR_NAME:
-    RAW: "datasets/examples/raw"
-  SPLIT_LIST: "datasets/examples/list.txt"
+    RAW: "/data/Reedbush/gi95/tokuoka/QCANet/datasets/dataset_bf/bf/raw"
+    INSTANCE: "/data/kanazawa/images/qcanet"
+  SPLIT_LIST: "datasets/split_list_411/validation/dataset_sampled.txt"
   ARRAY_TYPE: "tif"
   RESOLUTION: !!python/tuple [1.0, 1.0, 2.5]
   DIMMENSION: 3
-  BASETIME: 318
   PREPROCESS:
     AUGMENTATION: False
     SCALING: True
@@ -14,4 +14,3 @@ DATASETS:
   BATCH_SIZE: 1
 TEST_TIME:
   HALF_PRECISION: True
-  DELETE_OBJECT_SIZE: 0
