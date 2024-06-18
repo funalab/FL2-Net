@@ -33,15 +33,20 @@ Our model performs instance segmentation of the time-series 3D bright-field micr
 3. Inference on example test dataset.
   
    Currently we provide some pretrained models for 3d and 3d+t bright-feild microscopy image.
-   * `models/best_model.pth` : model trained using `confs/model/base.yaml`
-   * `models/best_model_gru3.path` : model with GRU(Gated recurrent unit) trined using `confs/model/gru3.yaml`
+   * [best_model.pth](https://fun.bio.keio.ac.jp/software/QCANet/best_model.pth) : model trained using `confs/model/base.yaml`
+   * [best_model_gru3.path](https://fun.bio.keio.ac.jp/software/QCANet/best_model_gru3.pth) : model with GRU(Gated recurrent unit) trined using `confs/model/gru3.yaml`  
+
+   Run the following command to segment brigh-field images in `datasets/examples/raw`.
+   The segmentation images will be generated in the `results/test_example_[time_stamp]/Predictions`.
+   The expected output of this segmentation is stored in `images/example_output/ws_16cell-stage.tif`. 
 
    ```sh
+   % wget -P models https://fun.bio.keio.ac.jp/software/QCANet/best_model.pth  # or best_model_gru.path
    % CUDA_VISIBLE_DEVICES=1 python src/test.py \
-      --test_conf confs/test/test.yaml \
-      --model_conf confs/model/base.yaml \
-      -o results/test \
-      -m models/best_model.path \
+      --test_conf confs/test/test_example.yaml \
+      --model_conf confs/model/base.yaml \  # or gru3.yaml
+      -o results/test_example \
+      -m models/best_model.path \  # or best_model_gru3.path
       --save_img
    ```
 
