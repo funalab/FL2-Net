@@ -1,0 +1,17 @@
+TASK: "segmentation"
+DATASETS:
+  DIR_NAME:
+    RAW: "datasets/examples/raw"
+  SPLIT_LIST: "datasets/examples/example.txt"
+  ARRAY_TYPE: "tif"
+  RESOLUTION: !!python/tuple [1.0, 1.0, 2.5]
+  DIMMENSION: 3
+  PREPROCESS:
+    AUGMENTATION: False
+    SCALING: True
+  INPUT_SIZE: False
+  BATCH_SIZE: 1
+  BACKGROUN_VALUE: 1  # value 1 means foregroud instance
+TEST_TIME:
+  HALF_PRECISION: True
+  DELETE_OBJECT_SIZE: 0
