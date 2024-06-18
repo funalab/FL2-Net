@@ -152,6 +152,7 @@ class PreprocessedDataset(Dataset):
         self.ndim = cfg.DATASETS.DIMMENSION
         self.rnn = cfg.MODEL.BACKBONE.RECURRENT
         self.train = train
+        self.base_time = cfg.DATASETS.get('BASETIME', 1)
         if self.rnn:
             self.seq_len = cfg.MODEL.BACKBONE.RNN.LENGTH
             self.bidirectional = cfg.MODEL.BACKBONE.RNN.BIDIRECTIONAL
@@ -214,8 +215,8 @@ class PreprocessedDataset(Dataset):
         
         # get raw image
         for tp in range(self.seq_len):
-            if first_tp + tp < 1:
-                img_path = os.path.join(emb_name, '001.tif')
+            if first_tp + tp < self.base_time:
+                img_path = os.path.join(emb_name, '{0:03d}.tif'.format(self.base_time))
             else:
                 img_path = os.path.join(emb_name, '{0:03d}.tif'.format(first_tp + tp))
             x.append(self._normalize(
@@ -236,8 +237,8 @@ class PreprocessedDataset(Dataset):
 
         # get ground truth (image and/or class)
         if self.bidirectional:
-            if first_tp + self.seq_len // 2 < 1:
-                img_path_gt = os.path.join(emb_name, '001.tif')
+            if first_tp + self.seq_len // 2 < self.base_time:
+                img_path_gt = os.path.join(emb_name, '{0:03}.tif'.format(self.base_time))
             else:
                 img_path_gt = os.path.join(emb_name, '{0:03d}.tif'.format(first_tp + self.seq_len // 2))
         else:
@@ -265,11 +266,14 @@ class PreprocessedDataset(Dataset):
                 center_img = self._padding(self._resize(center_img, order=0))
                 inputs['centers'], _, _ = crop_3d(center_img, crop_size=self.crop_size, position=position, aug_flag=aug_flag)
 
-        else:
+        elif self.gt_path != None:
             # multi_batch inference is not supported
             inputs['image'] = x
             inputs['instances'] = np.zeros((gt_img.shape[-3], gt_img.shape[-2], gt_img.shape[-1]), dtype=np.int16)
             mask = gt_img > 0
             inputs['instances'][mask] = relabel_sequential(gt_img[mask])[0]
+
+        else:
+            inputs['image'] = x
 
         return inputs
