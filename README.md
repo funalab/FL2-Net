@@ -1,4 +1,4 @@
-# Four-dimensional label-free live cell image segmentation
+# FL<sup>2</sup>Net: Four-dimensional Label-Free Live cell image segmentation Network
 
 This is the code for [Four-dimensional label-free live cell image segmentation for predicting live birth potential of embryos]().
 This project is carried out in cooperation with [Funahashi Lab. at Keio University](https://fun.bio.keio.ac.jp/) and Yamagata Lab. at Kindai University.
@@ -20,13 +20,13 @@ Our method performs State-of-the-Art on time-series 3D bright-field microscopy i
 but ours w/o considering time-series information (Ours w/o GRU) also performs better than the existing methods.
 The segmentation accuracy below is represented by AP<sub>dsb</sub> with IoU thresholds ranging from 0.1 to 0.9
 
-| IoU threshold             | 0.1               | 0.2               | 0.3               | 0.4               | 0.5               | 0.6               | 0.7               | 0.8               | 0.9               |
-|---------------------------|-------------------|-------------------|-------------------|-------------------|-------------------|-------------------|-------------------|-------------------|-------------------|
-| Ours                      | **0.866**         | **0.861**         | **0.852**         | **0.836**         | **0.808**         | **0.763**         | **0.677**         | **0.454**         | **0.023**         |
-| Ours (w/o GRU)            | 0.870             | 0.863             | 0.850             | 0.829             | 0.795             | 0.738             | 0.642             | 0.405             | 0.012             |
-| QCANet[[2]](#ref2)        | 0.848             | 0.834             | 0.814             | 0.786             | 0.745             | 0.683             | 0.576             | 0.320             | 0.005             |
-| EmbedSeg[[3]](#ref3)      | 0.817             | 0.813             | 0.807             | 0.797             | 0.755             | 0.728             | 0.614             | 0.333             | 0.007             |
-| StarDist[[4]](#ref4)      | 0.569             | 0.551             | 0.513             | 0.458             | 0.389             | 0.291             | 0.134             | 0.006             | 0.000             |
+| IoU threshold              | 0.1               | 0.2               | 0.3               | 0.4               | 0.5               | 0.6               | 0.7               | 0.8               | 0.9               |
+|----------------------------|-------------------|-------------------|-------------------|-------------------|-------------------|-------------------|-------------------|-------------------|-------------------|
+| FL<sup>2</sup>Net          | **0.866**         | **0.861**         | **0.852**         | **0.836**         | **0.808**         | **0.763**         | **0.677**         | **0.454**         | **0.023**         |
+| FL<sup>2</sup>Net (w/o GRU)| 0.870             | 0.863             | 0.850             | 0.829             | 0.795             | 0.738             | 0.642             | 0.405             | 0.012             |
+| QCANet[[2]](#ref2)         | 0.848             | 0.834             | 0.814             | 0.786             | 0.745             | 0.683             | 0.576             | 0.320             | 0.005             |
+| EmbedSeg[[3]](#ref3)       | 0.817             | 0.813             | 0.807             | 0.797             | 0.755             | 0.728             | 0.614             | 0.333             | 0.007             |
+| StarDist[[4]](#ref4)       | 0.569             | 0.551             | 0.513             | 0.458             | 0.389             | 0.291             | 0.134             | 0.006             | 0.000             |
 
 
 
