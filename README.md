@@ -1,16 +1,16 @@
-# FL<sup>2</sup>Net: Four-dimensional Label-Free Live cell image segmentation Network
+# FL<sup>2</sup>-Net: Four-dimensional Label-Free Live cell image segmentation Network
 
 This is the code for [Four-dimensional label-free live cell image segmentation for predicting live birth potential of embryos]().
 This project is carried out in cooperation with [Funahashi Lab. at Keio University](https://fun.bio.keio.ac.jp/) and Yamagata Lab. at Kindai University.
 The images below are time-series 3D bright-field microscopy image and segmentation image by the proposed method.
-The 3D images visualized with 3D viewer plugin [[1]](#ref1) of Fiji.
+The 3D images visualized with 3D viewer plugin [1] of Fiji.
 
 <img src="images/segmentation_result.gif" alt="result" width="600"/>
 
 ## Overview
 
-Our method performs instance segmentation of 3D bright-field microscopy images.
-Our model performs instance segmentation of the time-series 3D bright-field microscopy images at each time point, and the quantitative criteria for mouse development are extracted from the acquired time-series segmentation image.
+FL<sup>2</sup>-Net is a deep learning-based segmentation method using the spatio-temporal feature in embryogenesis.
+FL<sup>2</sup>-Net performs instance segmentation of the time-series 3D bright-field microscopy images at each time point, and the quantitative criteria for mouse development are extracted from the acquired time-series segmentation image.
 
 <img src="images/model.png" alt="model" width="500"/>
 
@@ -24,9 +24,9 @@ The segmentation accuracy below is represented by AP<sub>dsb</sub> with IoU thre
 |----------------------------|-------------------|-------------------|-------------------|-------------------|-------------------|-------------------|-------------------|-------------------|-------------------|
 | FL<sup>2</sup>Net          | **0.866**         | **0.861**         | **0.852**         | **0.836**         | **0.808**         | **0.763**         | **0.677**         | **0.454**         | **0.023**         |
 | FL<sup>2</sup>Net (w/o GRU)| 0.870             | 0.863             | 0.850             | 0.829             | 0.795             | 0.738             | 0.642             | 0.405             | 0.012             |
-| QCANet[[2]](#ref2)         | 0.848             | 0.834             | 0.814             | 0.786             | 0.745             | 0.683             | 0.576             | 0.320             | 0.005             |
-| EmbedSeg[[3]](#ref3)       | 0.817             | 0.813             | 0.807             | 0.797             | 0.755             | 0.728             | 0.614             | 0.333             | 0.007             |
-| StarDist[[4]](#ref4)       | 0.569             | 0.551             | 0.513             | 0.458             | 0.389             | 0.291             | 0.134             | 0.006             | 0.000             |
+| QCANet[2]         | 0.848             | 0.834             | 0.814             | 0.786             | 0.745             | 0.683             | 0.576             | 0.320             | 0.005             |
+| EmbedSeg[3]       | 0.817             | 0.813             | 0.807             | 0.797             | 0.755             | 0.728             | 0.614             | 0.333             | 0.007             |
+| StarDist[4]       | 0.569             | 0.551             | 0.513             | 0.458             | 0.389             | 0.291             | 0.134             | 0.006             | 0.000             |
 
 
 
@@ -50,8 +50,8 @@ The segmentation accuracy below is represented by AP<sub>dsb</sub> with IoU thre
 3. Inference on example test dataset.
   
    Currently we provide some pretrained models for 3d and 3d+t bright-feild microscopy image.
-   * [best_model.pth](https://fun.bio.keio.ac.jp/software/QCANet/best_model.pth) : model trained using `confs/model/base.yaml`
-   * [best_model_gru3.path](https://fun.bio.keio.ac.jp/software/QCANet/best_model_gru3.pth) : model with GRU(Gated recurrent unit) trained using `confs/model/gru3.yaml`  
+   * [best_model.pth]() : model trained using `confs/model/base.yaml`
+   * [best_model_gru3.path]() : model with GRU(Gated recurrent unit) trained using `confs/model/gru3.yaml`  
 
    Run the following command to segment brigh-field images in `datasets/examples/raw`.
    The segmentation images will be generated in the `results/test_example_[time_stamp]/Predictions`.
@@ -68,7 +68,7 @@ The segmentation accuracy below is represented by AP<sub>dsb</sub> with IoU thre
    ```
 
 ## Training and Inference on your data
-   This system uses [AttrDict](https://github.com/bcj/AttrDict) to access config values as attribute.
+   This repository uses [AttrDict](https://github.com/bcj/AttrDict) to access config values as attribute.
    For training and inference on your data, set config with reference to `confs/runtime/base.yaml` and `confs/test/test.yaml`.
    
    * runtime/inference config (e.g. `confs/runtime/base.yaml` / `confs/test/test.yaml`)
