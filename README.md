@@ -139,6 +139,6 @@ The development of this algorithm was funded by JST CREST (Grant Number JPMJCR23
 ## References
 
 <a id="ref1"></a> [[1] Schmid, Benjamin, et al. "A high-level 3D visualization API for Java and ImageJ." BMC bioinformatics 11, 274 (2010).](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-11-274)  
-<a id="ref2"></a> [[2] Yuta, Tokuoka, et al. "3D convolutional neural networks-based segmentation to acquire quantitative criteria of the nucleus during mouse embryogenesis." NPJ systems biology and applications 6, 32 (2020).](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-11-274)  
+<a id="ref2"></a> [[2] Yuta, Tokuoka, et al. "3D convolutional neural networks-based segmentation to acquire quantitative criteria of the nucleus during mouse embryogenesis." NPJ systems biology and applications 6, 32 (2020).](https://www.nature.com/articles/s41540-020-00152-8)  
 <a id="ref3"></a> [[3] Manan, Lalit, et al. " EmbedSeg: Embedding-based Instance Segmentation for Biomedical Microscopy Data." Medical image analysis 81, 10523 (2022).](https://www.sciencedirect.com/science/article/abs/pii/S1361841522001700)  
 <a id="ref4"></a> [[4] Martin, Weigert, et al. "Star-convex Polyhedra for 3D Object Detection and Segmentation in Microscopy."  in Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision 3666–3673 (2020).](https://openaccess.thecvf.com/content_WACV_2020/html/Weigert_Star-convex_Polyhedra_for_3D_Object_Detection_and_Segmentation_in_Microscopy_WACV_2020_paper.html)  
