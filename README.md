@@ -3,7 +3,7 @@
 This is the code for [Four-dimensional label-free live cell image segmentation for predicting live birth potential of embryos]().
 This project is carried out in cooperation with [Funahashi Lab. at Keio University](https://fun.bio.keio.ac.jp/) and Yamagata Lab. at Kindai University.
 The images below are time-series 3D bright-field microscopy image and segmentation image by the proposed method.
-The 3D images visualized with 3D viewer plugin [[1]](#References) of Fiji.
+The 3D images visualized with 3D viewer plugin [[1]](#references) of Fiji.
 
 <img src="images/segmentation_result.gif" alt="result" width="600"/>
 
@@ -24,9 +24,9 @@ The segmentation accuracy below is represented by AP<sub>dsb</sub> with IoU thre
 |----------------------------|-------------------|-------------------|-------------------|-------------------|-------------------|-------------------|-------------------|-------------------|-------------------|
 | FL<sup>2</sup>Net          | **0.866**         | **0.861**         | **0.852**         | **0.836**         | **0.808**         | **0.763**         | **0.677**         | **0.454**         | **0.023**         |
 | FL<sup>2</sup>Net (w/o GRU)| 0.870             | 0.863             | 0.850             | 0.829             | 0.795             | 0.738             | 0.642             | 0.405             | 0.012             |
-| QCANet[[2]](#References)         | 0.848             | 0.834             | 0.814             | 0.786             | 0.745             | 0.683             | 0.576             | 0.320             | 0.005             |
-| EmbedSeg[[3]](#References)       | 0.817             | 0.813             | 0.807             | 0.797             | 0.755             | 0.728             | 0.614             | 0.333             | 0.007             |
-| StarDist[[4]](#References)       | 0.569             | 0.551             | 0.513             | 0.458             | 0.389             | 0.291             | 0.134             | 0.006             | 0.000             |
+| QCANet[[2]](#references)         | 0.848             | 0.834             | 0.814             | 0.786             | 0.745             | 0.683             | 0.576             | 0.320             | 0.005             |
+| EmbedSeg[[3]](#references)       | 0.817             | 0.813             | 0.807             | 0.797             | 0.755             | 0.728             | 0.614             | 0.333             | 0.007             |
+| StarDist[[4]](#references)       | 0.569             | 0.551             | 0.513             | 0.458             | 0.389             | 0.291             | 0.134             | 0.006             | 0.000             |
 
 
 
