@@ -50,8 +50,8 @@ The segmentation accuracy below is represented by AP<sub>dsb</sub> with IoU thre
 3. Inference on example test dataset.
   
    Currently we provide some pretrained models for 3d and 3d+t bright-feild microscopy image.
-   * [best_model.pth]() : model trained using `confs/model/base.yaml`
-   * [best_model_gru3.path]() : model with GRU(Gated recurrent unit) trained using `confs/model/gru3.yaml`  
+   * [trained_model.pth](https://drive.usercontent.google.com/download?id=1PUYnMA7-El0OtJNHR-gDxwBzD7yP_g7V&confirm=xxx) : model trained using `confs/model/gru3.yaml`
+   * [trained_model_woGRU.path](https://drive.usercontent.google.com/download?id=1v0HN7SwbvvP7q71XNXVj1pdjlPPW0R1C&confirm=xxx) : model without GRU (Gated recurrent unit) trained using `confs/model/base.yaml`  
 
    Run the following command to segment brigh-field images in `datasets/examples/raw`.
    The segmentation images will be generated in the `results/test_example_[time_stamp]/Predictions`.
@@ -61,9 +61,9 @@ The segmentation accuracy below is represented by AP<sub>dsb</sub> with IoU thre
    % wget -P models https://fun.bio.keio.ac.jp/software/QCANet/best_model.pth  # or best_model_gru.path
    % CUDA_VISIBLE_DEVICES=1 python src/test.py \
       --test_conf confs/test/test_example.yaml \
-      --model_conf confs/model/base.yaml \  # or gru3.yaml
+      --model_conf confs/model/gru3.yaml \
       -o results/test_example \
-      -m models/best_model.path \  # or best_model_gru3.path
+      -m models/trained_model.path \
       --save_img
    ```
 
