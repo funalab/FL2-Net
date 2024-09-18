@@ -58,12 +58,12 @@ The segmentation accuracy below is represented by AP<sub>dsb</sub> with IoU thre
    The expected output of this segmentation is stored in `images/example_output`. 
 
    ```sh
-   % wget -P models https://fun.bio.keio.ac.jp/software/QCANet/best_model.pth  # or best_model_gru.path
+   % wget -O models/trained_model.pth https://drive.usercontent.google.com/download?id=1PUYnMA7-El0OtJNHR-gDxwBzD7yP_g7V&confirm=xxx
    % CUDA_VISIBLE_DEVICES=1 python src/test.py \
       --test_conf confs/test/test_example.yaml \
       --model_conf confs/model/gru3.yaml \
       -o results/test_example \
-      -m models/trained_model.path \
+      -m models/trained_model.pth \
       --save_img
    ```
 
