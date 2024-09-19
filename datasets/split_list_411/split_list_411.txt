@@ -1,0 +1,56 @@
+F001
+[train]
+8 10 9 1 6 3 2 4 
+[test]
+7 11 
+[validation]
+12 5 
+
+F002
+[train]
+4 8 3 10 7 1 11 6 
+[test]
+12 2 
+[validation]
+9 5 
+
+F003
+[train]
+5 4 10 9 2 1 12 8 
+[test]
+7 11 
+[validation]
+3 6 
+
+F004
+[train]
+10 8 6 2 1 9 5 12 
+[test]
+3 7 
+[validation]
+4 11 
+
+F005
+[train]
+10 8 5 9 2 6 4 11 
+[test]
+7 12 
+[validation]
+1 3 
+
+F006
+[train]
+12 8 1 5 4 11 10 9 
+[test]
+3 2 
+[validation]
+7 6 
+
+F007
+[train]
+5 3 11 9 7 6 10 4 
+[test]
+8 2 
+[validation]
+12 1 
+
