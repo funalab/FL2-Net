@@ -1,6 +1,6 @@
 # FL<sup>2</sup>-Net: Four-dimensional Label-Free Live cell image segmentation Network
 
-This is the code for [Four-dimensional label-free live cell image segmentation for predicting live birth potential of embryos]().
+This is the code for [Four-dimensional label-free live cell image segmentation for predicting live birth potential of embryos](https://www.biorxiv.org/content/10.1101/2024.09.25.614861v1).
 This project is carried out in cooperation with [Funahashi Lab. at Keio University](https://fun.bio.keio.ac.jp/) and Yamagata Lab. at Kindai University.
 The images below are time-series 3D bright-field microscopy image and segmentation image by the proposed method.
 The 3D images visualized with 3D viewer plugin [[1]](#references) of Fiji.
