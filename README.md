@@ -35,13 +35,13 @@ The segmentation accuracy below is represented by AP<sub>dsb</sub> with IoU thre
 1. Download this repository by `git clone`.
 
    ```sh
-   % git clone https://github.com/funalab/BFsegmentation.git
+   % git clone https://github.com/funalab/FL2-Net.git
    ```
 
 2. Install requirements.
 
    ```sh
-   % cd BFsegmentation/
+   % cd FL2-Net/
    % python -m venv venv
    % source ./venv/bin/activate
    % pip install -r requirements.txt
@@ -120,7 +120,7 @@ The segmentation accuracy below is represented by AP<sub>dsb</sub> with IoU thre
    Pass the directory path that stores the segmentation images outputted by process 3 (`results/test_[time_stamp]/Predictions`) to the argument `-i`.
    Extracted quantitative criteria will be exported to `criteria.csv`.
    ```sh
-   % python -i [path/to/segmentation/images] -o results/feat
+   % python src/extract.py -i [path/to/segmentation/images] -o results/feat
    ```
 
 5. **Live birth potential prediction**:  
