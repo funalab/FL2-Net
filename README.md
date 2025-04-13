@@ -131,7 +131,14 @@ The segmentation accuracy below is represented by AP<sub>dsb</sub> with IoU thre
 - The pair of image and ground truth must be the same name `T.tif` (T: temporal index composed of three digits).  
 - The timepoint index is assumed to start from 1 by default. If you want to change it, set `cfg.DATASETS.BASETIME`.
 - For time-series images, `confs/model/gru3.yaml` is recommended for higher performance. If you want to perform time-independent segmentation, `confs/model/base.yaml`, which offers a smaller model, is recommended.  
- 
+
+## Dataset
+3D datasets are available as release assets. Assets include:
+- [3D bright-field microscopy images](https://drive.usercontent.google.com/download?id=1OAMmFM76TputGnU6nell6LU81N0hDmRc&confirm=xxx)
+- [GT instance annotations](https://drive.usercontent.google.com/download?id=1hdSnCthLtyKMCahFLHUz36Awtj2-OC6T&confirm=xxx)
+
+The filenames of the images used for Train, Validation, and Test in this study are stored in `datasets/split_list_411/train/dataset.txt`, `datasets/split_list_411/validation/dataset.txt`, and `datasets/split_list_411/test/dataset.txt`, respectively.
+
 ## Acknowledgement
 
 The microscopy images included in this repository is provided by Yamagata Lab., Kindai University.
