@@ -1,6 +1,6 @@
 # FL<sup>2</sup>-Net: Four-dimensional Label-Free Live cell image segmentation Network
 
-This is the code for [Four-dimensional label-free live cell image segmentation for predicting live birth potential of embryos](https://www.biorxiv.org/content/10.1101/2024.09.25.614861v1).
+This is the code for [Nuclear segmentation in four-dimensional label-free microscopy images for predicting live birth potential of mouse embryos](https://doi.org/10.1016/j.compbiomed.2025.111179).
 This project is carried out in cooperation with [Funahashi Lab. at Keio University](https://fun.bio.keio.ac.jp/) and Yamagata Lab. at Kindai University.
 The images below are time-series 3D bright-field microscopy image and segmentation image by the proposed method.
 The 3D images visualized with 3D viewer plugin [[1]](#references) of Fiji.
@@ -16,7 +16,7 @@ FL<sup>2</sup>-Net performs instance segmentation of the time-series 3D bright-f
 
 ## Performance
 
-Our method performs State-of-the-Art on time-series 3D bright-field microscopy images by considering time-series information, 
+Our method performs State-of-the-Art on time-series 3D bright-field microscopy images by considering time-series information,
 but ours w/o considering time-series information (Ours w/o GRU) also performs better than the existing methods.
 The segmentation accuracy below is represented by AP<sub>dsb</sub> with IoU thresholds ranging from 0.1 to 0.9
 
@@ -27,8 +27,6 @@ The segmentation accuracy below is represented by AP<sub>dsb</sub> with IoU thre
 | QCANet[[2]](#references)         | 0.848             | 0.834             | 0.814             | 0.786             | 0.745             | 0.683             | 0.576             | 0.320             | 0.005             |
 | EmbedSeg[[3]](#references)       | 0.817             | 0.813             | 0.807             | 0.797             | 0.755             | 0.728             | 0.614             | 0.333             | 0.007             |
 | StarDist[[4]](#references)       | 0.569             | 0.551             | 0.513             | 0.458             | 0.389             | 0.291             | 0.134             | 0.006             | 0.000             |
-
-
 
 ## QuickStart
 
@@ -55,7 +53,7 @@ The segmentation accuracy below is represented by AP<sub>dsb</sub> with IoU thre
 
    Run the following command to segment brigh-field images in `datasets/examples/raw`.
    The segmentation images will be generated in the `results/test_example_[time_stamp]/Predictions`.
-   The expected output of this segmentation is stored in `images/example_output`. 
+   The expected output of this segmentation is stored in `images/example_output`.
 
    ```sh
    % mkdir models
@@ -69,16 +67,17 @@ The segmentation accuracy below is represented by AP<sub>dsb</sub> with IoU thre
    ```
 
 ## Training and Inference on your data
+
    This repository uses [AttrDict](https://github.com/bcj/AttrDict) to access config values as attribute.
    For training and inference on your data, set config with reference to `confs/runtime/base.yaml` and `confs/test/test.yaml`.
-   
-   * runtime/inference config (e.g. `confs/runtime/base.yaml` / `confs/test/test.yaml`)
-     * `cfg.DATASETS.DIR_NAME.RAW` : Specify directory path of raw images.
-     * `cfg.DATASETS.DIR_NAME.INSTANCE` : Specify directory path of ground truth images for instance segmentation.
-     * `cfg.DATASETS.SPLIT_LIST` : Specify the path of the file in which the input file name used for training/validation/test is enumerated.
-     * `cfg.DATASETS.RESOLUTION` : Specify microscopy resolution of x-, y-, and z-axis. (defalt=1.0:1.0:2.18)
 
-   * model config  (e.g. `confs/model/base.yaml` / `confs/model/gru3.yaml`)  
+* runtime/inference config (e.g. `confs/runtime/base.yaml` / `confs/test/test.yaml`)
+  * `cfg.DATASETS.DIR_NAME.RAW` : Specify directory path of raw images.
+  * `cfg.DATASETS.DIR_NAME.INSTANCE` : Specify directory path of ground truth images for instance segmentation.
+  * `cfg.DATASETS.SPLIT_LIST` : Specify the path of the file in which the input file name used for training/validation/test is enumerated.
+  * `cfg.DATASETS.RESOLUTION` : Specify microscopy resolution of x-, y-, and z-axis. (defalt=1.0:1.0:2.18)
+
+* model config  (e.g. `confs/model/base.yaml` / `confs/model/gru3.yaml`)  
 
 1. **Training**:  
    Run the following command to train segmentation model on the datasets/input_example dataset.
@@ -95,6 +94,7 @@ The segmentation accuracy below is represented by AP<sub>dsb</sub> with IoU thre
 2. **Validation**:  
    Pass the directory path that stores the models genereted by the training process (`results/train_[time_stamp]/trained_models`) to the argument `-m`.
    Run the following command to validate generated models and get best model.
+
    ```sh
    % CUDA_VISIBLE_DEVICES=[GPU ID] python src/validation.py \
       --test_conf confs/test/validation.yaml \
@@ -102,11 +102,12 @@ The segmentation accuracy below is represented by AP<sub>dsb</sub> with IoU thre
       -m [path/to/models/directory] \
       -o results/val
    ```
-   
+
 3. **Test**:  
    Pass the best-model path selected by validation process to the argument `-m`.
    The segmentation images will be generated in the `results/test_[time_stamp]/Predictions`.
    If you want to evaluate segmentation accuracy, use the argument `--evaluation`.
+
    ```sh
    % CUDA_VISIBLE_DEVICES=[GPU ID] python src/test.py \
       --test_conf confs/test/test.yaml \
@@ -119,23 +120,27 @@ The segmentation accuracy below is represented by AP<sub>dsb</sub> with IoU thre
 4. **Extraction of quantitative criteria of time-series data**:  
    Pass the directory path that stores the segmentation images outputted by process 3 (`results/test_[time_stamp]/Predictions`) to the argument `-i`.
    Extracted quantitative criteria will be exported to `criteria.csv`.
+
    ```sh
    % python src/extract.py -i [path/to/segmentation/images] -o results/feat
    ```
 
 5. **Live birth potential prediction**:  
-   [Normalized Multi-View Attention Network (NVAN)](https://github.com/funalab/NVAN) performs 
+   [Normalized Multi-View Attention Network (NVAN)](https://github.com/funalab/NVAN) performs
    the prediction of live birth potential of embryo using the time-series segmentation images extracted by segmentation (`criteria.csv`)  
 
 **NOTE**
-- The pair of image and ground truth must be the same name `T.tif` (T: temporal index composed of three digits).  
-- The timepoint index is assumed to start from 1 by default. If you want to change it, set `cfg.DATASETS.BASETIME`.
-- For time-series images, `confs/model/gru3.yaml` is recommended for higher performance. If you want to perform time-independent segmentation, `confs/model/base.yaml`, which offers a smaller model, is recommended.  
+
+* The pair of image and ground truth must be the same name `T.tif` (T: temporal index composed of three digits).  
+* The timepoint index is assumed to start from 1 by default. If you want to change it, set `cfg.DATASETS.BASETIME`.
+* For time-series images, `confs/model/gru3.yaml` is recommended for higher performance. If you want to perform time-independent segmentation, `confs/model/base.yaml`, which offers a smaller model, is recommended.  
 
 ## Dataset
+
 3D datasets are available as release assets. Assets include:
-- [3D bright-field microscopy images](https://drive.usercontent.google.com/download?id=1OAMmFM76TputGnU6nell6LU81N0hDmRc&confirm=xxx)
-- [GT instance annotations](https://drive.usercontent.google.com/download?id=1hdSnCthLtyKMCahFLHUz36Awtj2-OC6T&confirm=xxx)
+
+* [3D bright-field microscopy images](https://drive.usercontent.google.com/download?id=1OAMmFM76TputGnU6nell6LU81N0hDmRc&confirm=xxx)
+* [GT instance annotations](https://drive.usercontent.google.com/download?id=1hdSnCthLtyKMCahFLHUz36Awtj2-OC6T&confirm=xxx)
 
 The filenames of the images used for Train, Validation, and Test in this study are stored in `datasets/split_list_411/train/dataset.txt`, `datasets/split_list_411/validation/dataset.txt`, and `datasets/split_list_411/test/dataset.txt`, respectively.
 
